@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 
 public class Direccion {
     private String calle;
-    private String districto;
+    private String distrito;
     private String ciudad;
     private String numero;
     private String complemento;
 
     public Direccion(DatosDireccion direccion){
         this.calle = direccion.calle();
-        this.districto = direccion.districto();
+        this.distrito = direccion.distrito();
         this.ciudad = direccion.ciudad();
         this.numero = direccion.numero();
         this.complemento = direccion.complemento();
@@ -28,7 +28,7 @@ public class Direccion {
 
     public Direccion actualizarDatos(DatosDireccion direccion) {
         this.calle = direccion.calle();
-        this.districto = direccion.districto();
+        this.distrito = direccion.distrito();
         this.ciudad = direccion.ciudad();
         this.numero = direccion.numero();
         this.complemento = direccion.complemento();

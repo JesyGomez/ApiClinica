@@ -1,5 +1,6 @@
 package med.voll.api.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.domain.direccion.DatosDireccion;
@@ -16,6 +17,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/medicos")
+@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
     @Autowired
@@ -27,7 +29,7 @@ public class MedicoController {
         Medico medico = medicoRepository.save(new Medico(datosRegistroMedico));
         DatosRespuestaMedico datosRespuestaMedico = new DatosRespuestaMedico(medico.getId(), medico.getNombre(), medico.getEmail(), medico.getDocumento(), medico.getTelefono(),
                 medico.getEspecialidad().toString(),
-                new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistricto(),
+                new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistrito(),
                         medico.getDireccion().getCiudad(), medico.getDireccion().getNumero(),
                         medico.getDireccion().getComplemento()));
         URI url = uriComponentsBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
@@ -48,7 +50,7 @@ public class MedicoController {
      medico.actualizarDatos(datosActualizarMedico);
      return ResponseEntity.ok(new DatosRespuestaMedico(medico.getId(), medico.getNombre(), medico.getEmail(), medico.getDocumento(), medico.getTelefono(),
              medico.getEspecialidad().toString(),
-             new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistricto(),
+             new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistrito(),
                      medico.getDireccion().getCiudad(), medico.getDireccion().getNumero(),
                      medico.getDireccion().getComplemento())));
     }
@@ -67,7 +69,7 @@ public class MedicoController {
         Medico medico = medicoRepository.getReferenceById(id);
         var datosMedicos = new DatosRespuestaMedico(medico.getId(), medico.getNombre(), medico.getEmail(), medico.getDocumento(), medico.getTelefono(),
                 medico.getEspecialidad().toString(),
-                new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistricto(),
+                new DatosDireccion(medico.getDireccion().getCalle(), medico.getDireccion().getDistrito(),
                         medico.getDireccion().getCiudad(), medico.getDireccion().getNumero(),
                         medico.getDireccion().getComplemento()));
         return ResponseEntity.ok(datosMedicos);

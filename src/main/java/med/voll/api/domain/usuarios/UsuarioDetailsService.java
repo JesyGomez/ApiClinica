@@ -15,7 +15,11 @@ public class UsuarioDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usuarioRepository.findByLogin(username);
+        var usuario = usuarioRepository.findByLogin(username);
+        if (usuario == null) {
+            throw new UsernameNotFoundException("Usuario no encontrado: " + username);
+        }
+        return usuario; // Retorna directamente el Usuario, ya que implementa UserDetails
     }
 }
 //Sin esta clase me daría error StackOverflowError (problema de recursividad)

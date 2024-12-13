@@ -8,15 +8,13 @@ public record DatosDireccion(
         String calle,
 
         @NotBlank
-        String districto,
+        String distrito,
 
         @NotBlank
         String ciudad,
 
         @NotBlank
         String numero,
-
-        @NotBlank
         String complemento
 ) {
 }
